@@ -15,22 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from django.conf import settings
 
+from items.urls import urlpatterns as items_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-from django.urls import include
-from django.urls import path
-urlpatterns += [
-    path('items/', include('items.urls')),
+    path('', include(items_urlpatterns))
 ]
 
-from django.views.generic import RedirectView
-urlpatterns += [
-    path('', RedirectView.as_view(url='/items/', permanent=True))
-]
 
-from django.conf import settings
-from django.conf.urls.static import static
+if settings.DEBUG:
+    from django.conf.urls.static import static
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
