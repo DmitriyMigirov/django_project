@@ -4,34 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="765c61d6-2462-4ad6-aa33-1b61dbcbc8ca" name="Changes" comment="Created New Models">
-      <change afterPath="$PROJECT_DIR$/images/item/coca-cola-original-can.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/item/coca-cola-original-can_Ag8FpDi.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/item/Без_названия.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/onlinestore/constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/onlinestore/mixins/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/onlinestore/mixins/models_mixins.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/onlinestore/model_choices.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orders/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/59213723-alcohol-free-rubber-stamp.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/59213723-alcohol-free-rubber-stamp_MKe1YYu.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/Без_названия.jpeg" afterDir="false" />
+    <list default="true" id="765c61d6-2462-4ad6-aa33-1b61dbcbc8ca" name="Changes" comment="safe">
+      <change afterPath="$PROJECT_DIR$/images/item/coca-cola-original-can_Io1YwP9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/item/Без_названия_MLRVkNG.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/59213723-alcohol-free-rubber-stamp_cqHQGrh.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/Без_названия_bkPEkkN.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/items/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/items/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/items/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onlinestore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/onlinestore/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/onlinestore/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/onlinestore/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/orders/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/orders/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +172,7 @@
       <workItem from="1664725195057" duration="971000" />
       <workItem from="1664726175751" duration="2702000" />
       <workItem from="1664980630897" duration="5474000" />
-      <workItem from="1664986125751" duration="2264000" />
+      <workItem from="1664986125751" duration="3812000" />
     </task>
     <task id="LOCAL-00001" summary="Creating virtual env and requirements.txt">
       <created>1664372239628</created>
@@ -234,7 +216,21 @@
       <option name="project" value="LOCAL" />
       <updated>1664728489953</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="safe">
+      <created>1664988398408</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1664988398408</updated>
+    </task>
+    <task id="LOCAL-00008" summary="safe">
+      <created>1664988410126</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1664988410126</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,7 +255,8 @@
     <MESSAGE value="flake8" />
     <MESSAGE value="Update django.yml" />
     <MESSAGE value="Created New Models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created New Models" />
+    <MESSAGE value="safe" />
+    <option name="LAST_COMMIT_MESSAGE" value="safe" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/django_project$manage.coverage" NAME="manage Coverage Results" MODIFIED="1664728845142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

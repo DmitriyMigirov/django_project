@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from decimal import Decimal
+
 from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
 from onlinestore.model_choices import DiscountTypes
@@ -20,6 +22,7 @@ class Discount(PKMixin):
         choices=DiscountTypes.choices,
         default=DiscountTypes.VALUE
     )
+
     def __str__(self):
         return f'{self.code} | {self.amount} | {self.is_active}'
 
@@ -43,3 +46,16 @@ class Order(PKMixin):
         null=True,
         blank=True
     )
+
+    def count_total_amount(self):
+        if self.discount:
+            if self.discount.discount_type == DiscountTypes.VALUE:
+                return (self.total_amount - self.discount.amount).quantize(
+                    Decimal('.00'))
+            elif self.discount.discount_type == DiscountTypes.PERCENTS:
+                return (self.total_amount - ((self.total_amount * self.discount.amount) / 100)).quantize(
+                    Decimal('.00'))  # noqa
+        return self.total_amount
+
+    def __str__(self):
+        return f'{self.count_total_amount()}'
