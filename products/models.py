@@ -17,36 +17,29 @@ def upload_image(instance, filename):
            f'{instance.pk}/image{extension}'
 
 
-class Item(PKMixin):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/item')
-    category = models.ForeignKey(
-        'items.Category',
-        on_delete=models.CASCADE
-    )
-    def __str__(self):
-        return f"{self.name} | {self.category}"
-
 class Category(PKMixin):
     name = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='uploads/')
 
     def __str__(self):
-        return self.name
+        return f'{self.name} | {self.description}'
 
 
 class Product(PKMixin):
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='images/product')
+    category = models.ForeignKey(
+        'products.Category',
+        on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1)])
     sku = models.CharField(
-        max_length=32,
+        max_length=64,
         blank=True,
-        null=True
-    )
-    items = models.ManyToManyField(Item)
+        null=True)
+    products = models.ManyToManyField('products.Product', blank=True)
 
     def __str__(self):
-        return f"{self.sku} | {self.price}"
+        return f'{self.name}'

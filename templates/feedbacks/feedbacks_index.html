@@ -1,27 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Feedbacks page</title>
-</head>
-<body>
-<h1>Feedbacks</h1>
-{% for item in feedbacks %}
-    <p>
-        <span>Text: {{ item.text }}</span>
-        <span>User: {{ item.user }}</span>
-        <span>Rating: {{ item.rating }}</span>
-    </p>
-{% endfor %}
-<div>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-            <label>{{ field.label }}</label>
-            {{ field }}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Feedbacks
+{% endblock title %}
+{% block content %}
+    <div class="text-center">
+        <h1>Feedbacks:</h1>
+        {% for field in feedbacks %}
+            <p>
+                <span>User: {{ field.user }} |</span>
+                <span>Text: {{ field.text }} |</span>
+                <span>Rating: {{ field.rating }} ;</span>
+            </p>
         {% endfor %}
-        <input type="submit" value="Send feedback">
-    </form>
-</div>
-</body>
-</html>
+        <h1>Please, write your feedback</h1>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" value="Write feedback">
+            </form>
+            <p>
+                {{ form.errors }}
+            </p>
+        </div>
+    </div>
+{% endblock content %}
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
