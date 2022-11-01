@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'orders',
     'feedbacks',
     'users',
+    'tracking',
 
 
 ]
@@ -66,7 +67,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'onlinestore.urls'
-
+APPEND_SLASH = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
