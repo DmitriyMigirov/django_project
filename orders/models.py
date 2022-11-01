@@ -2,6 +2,8 @@ from decimal import Decimal
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django_lifecycle import LifecycleModel, hook, BEFORE_SAVE, AFTER_UPDATE
+
 
 from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
@@ -41,6 +43,8 @@ class Order(PKMixin):
         blank=True,
         null=True,
     )
+    is_active = models.BooleanField(default=True)
+    is_paid = models.BooleanField(default=False)
 
     def count_total_amount(self):
         if self.discount:
@@ -51,5 +55,16 @@ class Order(PKMixin):
                 return (self.total_amount - ((self.total_amount * self.discount.amount) / 100)).quantize(Decimal('.00')) # noqa
         return self.total_amount
 
-    def __str__(self):
-        return f'{self.count_total_amount()}'
+    @hook(BEFORE_SAVE)
+    def order_after_save(self):
+        self.total_amount = 0
+        for product in self.products.all():
+            self.total_amount += product.price
+
+    @hook(AFTER_UPDATE)
+    def order_after_update(self):
+        if self.discount:
+            self.total_amount = self.count_total_amount()
+            self.save(update_fields=('total_amount',), skip_hooks=True)
+
+

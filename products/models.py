@@ -1,6 +1,7 @@
 from django.db import models
+
+from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
-from django.core.validators import MinValueValidator
 from os import path
 
 
@@ -19,8 +20,8 @@ def upload_image(instance, filename):
 
 class Category(PKMixin):
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    image = models.ImageField(upload_to='uploads/')
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='images/category')
 
     def __str__(self):
         return f'{self.name} | {self.description}'
@@ -29,12 +30,16 @@ class Category(PKMixin):
 class Product(PKMixin):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/product')
+    image = models.ImageField(upload_to='images/product',
+                              default='static/images/products/no_image.jpg')
     category = models.ForeignKey(
         'products.Category',
         on_delete=models.CASCADE)
-    price = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1)])
+    price = models.DecimalField(
+        max_digits=MAX_DIGITS,
+        decimal_places=DECIMAL_PLACES,
+        default=0
+    )
     sku = models.CharField(
         max_length=64,
         blank=True,
