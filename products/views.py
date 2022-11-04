@@ -8,7 +8,8 @@ from django.views.generic import ListView, FormView, DetailView
 from products.forms import ImportForm
 from products.models import Product
 from onlinestore.mixins.views_mixins import StaffUserCheck
-from onlinestore.settings import DOMAIN
+from django.conf import settings
+
 
 
 class ProductView(ListView):
@@ -37,7 +38,7 @@ def export_csv(request, *args, **kwargs):
             'description' : product.description,
             'price' : product.price,
             'sku' : product.sku,
-            'image' : DOMAIN + product.image.url
+            'image' : settings.DOMAIN + product.image.url
         })
     return response
 
