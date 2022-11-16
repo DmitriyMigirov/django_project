@@ -12,8 +12,13 @@ from django.conf import settings
 
 
 
+
 class ProductView(ListView):
     model = Product
+
+    def get_queryset(self):
+        return self.model.get_products()
+
 
 
 class ProductDetail(DetailView):

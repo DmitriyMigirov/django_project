@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -11,11 +13,14 @@ def feedbacks(request, *args, **kwargs):
     if request.method == 'POST':
         form = FeedbackModelForm(user=user, data=request.POST)
         if form.is_valid():
-            form.save()
+            new_feedback = form.save(commit=False)
+            new_feedback.text = re.sub(r'(\<(/?[^>]+)>)', '',
+                                       f'{form.cleaned_data.get("text")}')
+            new_feedback.save()
     else:
         form = FeedbackModelForm(user=user)
     context = {
-        'feedbacks': Feedback.objects.all(),
-        'form': form
+        'feedbacks': Feedback.get_feedbacks(),
+        'form': form,
     }
-    return render(request, 'feedbacks/feedbacks_page.html', context)
+    return render(request, 'feedbacks/index.html', context=context)

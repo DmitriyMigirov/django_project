@@ -4,6 +4,9 @@ from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
 from os import path
 from onlinestore.model_choices import  Currency
+from django.core.cache import cache
+from django_lifecycle import LifecycleModelMixin, hook, AFTER_CREATE, \
+    AFTER_DELETE, AFTER_UPDATE, BEFORE_DELETE, AFTER_SAVE
 
 DISCOUNT_CHOICES = (
     ("0", "В деньгах"),
@@ -53,3 +56,20 @@ class Product(PKMixin):
 
     def __str__(self):
         return f'{self.name}'
+
+    @classmethod
+    def _cache_key(self):
+        return 'products'
+
+    @classmethod
+    def get_products(cls):
+        products = cache.get(cls._cache_key())
+        if not products:
+            products = Product.objects.all()
+            cache.set(cls._cache_key(), products)
+        return products
+
+    @hook(AFTER_SAVE)
+    @hook(AFTER_DELETE)
+    def clear_products_cache(self):
+        cache.delete(self._cache_key())
