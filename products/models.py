@@ -3,7 +3,7 @@ from django.db import models
 from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
 from os import path
-
+from onlinestore.model_choices import  Currency
 
 DISCOUNT_CHOICES = (
     ("0", "В деньгах"),
@@ -39,6 +39,11 @@ class Product(PKMixin):
         max_digits=MAX_DIGITS,
         decimal_places=DECIMAL_PLACES,
         default=0
+    )
+    currency = models.CharField(
+        max_length=3,
+        choices=Currency.choices,
+        default=Currency.USD
     )
     sku = models.CharField(
         max_length=64,
