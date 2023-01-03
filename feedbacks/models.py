@@ -1,13 +1,8 @@
-import re
-
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth import get_user_model
 from onlinestore.mixins.models_mixins import PKMixin
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.cache import cache
-from django_lifecycle import hook, LifecycleModelMixin, AFTER_DELETE, \
-    AFTER_SAVE
 
 
 class Feedback(PKMixin):
@@ -26,19 +21,16 @@ def reformat_text(self):
     self = checked_feedback
     return self
 
-    @classmethod
-    def _cache_key(cls):
-        return 'feedbacks'
 
-    @classmethod
-    def get_feedbacks(cls):
-        feedbacks = cache.get(cls._cache_key())
-        if not feedbacks:
-            feedbacks = Feedback.objects.all()
-            cache.set(cls._cache_key(), feedbacks)
-        return feedbacks
+@classmethod
+def _cache_key(cls):
+    return 'feedbacks'
 
-    @hook(AFTER_SAVE)
-    @hook(AFTER_DELETE)
-    def clear_feedbacks_cache(self):
-        cache.delete(self._cache_key())
+
+@classmethod
+def get_feedbacks(cls):
+    feedbacks = cache.get(cls._cache_key())
+    if feedbacks:
+        cache.delete(cls._cache_key())
+    cache.set(cls._cache_key(), Feedback.objects.all())
+    return cache.get(cls._cache_key())

@@ -12,4 +12,4 @@ def task(self,x,y):
     except (KeyError, TypeError) as exc:
         raise self.retry(exc=exc, countdown=5)
     print('TEST AFTER')
-    return x+y
+    return x + y
