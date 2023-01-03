@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 from onlinestore.mixins.models_mixins import PKMixin
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -7,7 +7,7 @@ from django.core.cache import cache
 
 class Feedback(PKMixin):
     text = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)])
 
