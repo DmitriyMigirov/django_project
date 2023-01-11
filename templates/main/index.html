@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="text-center">
-                        <img class="w-100" src="{% static 'images/item/r2d2.jpg' %}" alt="r2d2">
+                        <img class="w-100" src="{% static 'images/item/AL090142_full.jpg' %}" alt="r2d2">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -42,6 +42,21 @@
                         over the years, sometimes by accident, sometimes on
                         purpose (injected humour and the like).
                     </p>
+                </div>
+                <div class="row-4">
+                    <div class="col col-lg-4 offset-lg-4">
+                        <h3>Contact Form:</h3>
+                        <form method="post">
+                        {% csrf_token %}
+                            {% for field in form %}
+                                <label>{{ field.label }}</label>
+                                <div class="row">
+                                    {{ field }}
+                                </div>
+                            {% endfor %}
+                        <input type="submit" class="btn btn-primary mt-2" value="Send your mail">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
