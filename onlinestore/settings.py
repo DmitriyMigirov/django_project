@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'tracking',
     'currencies',
     'favourites',
-
+    'phonenumber_field',
 
 ]
 
@@ -99,8 +99,12 @@ WSGI_APPLICATION = 'onlinestore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -123,6 +127,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.backends.PhoneModelBackend'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

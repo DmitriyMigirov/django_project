@@ -1,10 +1,10 @@
-from django.contrib.auth import get_user_model
+
 from django.core.cache import cache
 from django.db import  models
 from django_lifecycle import LifecycleModelMixin, hook, \
     AFTER_DELETE, AFTER_SAVE
 
-from currencies.models import CurrencyHistory #noqa
+from currencies.models import CurrencyHistory # noqa
 from onlinestore.constants import MAX_DIGITS, DECIMAL_PLACES
 from onlinestore.mixins.models_mixins import PKMixin
 from onlinestore.model_choices import Currency

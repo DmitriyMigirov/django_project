@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView, TemplateView
 
+from django.contrib import messages
+
 from orders.forms import AddShoppingCartForm, DeleteShoppingCartForm, \
     DiscountShoppingCartForm
 from orders.models import Order
@@ -37,6 +39,8 @@ class AddShoppingCartView(BaseShoppingCartRedirectView):
         super(AddShoppingCartView, self).post(request, *args, **kwargs)
         form = AddShoppingCartForm(request.POST, order=self.order)
         if form.is_valid():
+            messages.success(request,
+                             message='Product was added to shopping cart!')
             form.save()
         return self.get(request, *args, **kwargs)
 
@@ -46,6 +50,7 @@ class DeleteShoppingCartView(BaseShoppingCartRedirectView):
         super(DeleteShoppingCartView, self).post(request, *args, **kwargs)
         form = DeleteShoppingCartForm(request.POST, order=self.order)
         if form.is_valid():
+            messages.warning(request, message='Product was deleted!')
             form.save()
         return self.get(request, *args, **kwargs)
 
@@ -54,6 +59,7 @@ class ClearShoppingCartView(BaseShoppingCartRedirectView):
 
     def post(self, request, *args, **kwargs):
         super(ClearShoppingCartView, self).post(request, *args, *kwargs)
+        messages.warning(request, message='Shopping cart was cleared')
         self.order.delete()
         return self.get(request, *args, **kwargs)
 
@@ -64,6 +70,7 @@ class DiscountShoppingCartView(BaseShoppingCartRedirectView):
         super(DiscountShoppingCartView, self).post(request, *args, *kwargs)
         form = DiscountShoppingCartForm(request.POST, order=self.order)
         if form.is_valid():
+            messages.info(request, message='Discount was added!')
             form.save()
         return self.get(request, *args, **kwargs)
 
@@ -74,7 +81,8 @@ class PayShoppingCartView(BaseShoppingCartRedirectView):
     def post(self, request, *args, **kwargs):
         super(PayShoppingCartView, self).post(request, *args, *kwargs)
         if self.order.products.exists():
-            self.order.is_active, self.order.is_paid = self.order.is_paid, self.order.is_active # noqa
+            self.order.is_active, self.order.is_paid = self.order.is_paid, self.order.is_active  # noqa
+            messages.success(request, message='Successful Payment!')
             self.order.save()
         return self.get(request, *args, **kwargs)
 
