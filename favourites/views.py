@@ -3,9 +3,10 @@ from django.views.generic import TemplateView, RedirectView
 from django.contrib import messages
 from favourites.forms import AddFavouritesForm, DeleteFavouritesForm
 from favourites.mixins import GetFavouritesMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class FavouritesView(GetFavouritesMixin, TemplateView):
+class FavouritesView(LoginRequiredMixin,GetFavouritesMixin, TemplateView):
     template_name = 'favourites/product_favourite.html'
 
     def get_context_data(self, **kwargs):
@@ -17,7 +18,7 @@ class FavouritesView(GetFavouritesMixin, TemplateView):
 
 
 class AddFavouritesView(GetFavouritesMixin, RedirectView):
-    url = reverse_lazy('products')
+    url = reverse_lazy('favourites')
 
     def post(self, request, *args, **kwargs):
         form = AddFavouritesForm(request.POST,

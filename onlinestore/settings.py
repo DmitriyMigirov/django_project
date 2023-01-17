@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     #external apps
     'django_extensions',
     'django_celery_results',
+    'django_celery_beat',
+    'silk',
+    'debug_toolbar',
     #My apps
     'products',
     'main',
@@ -72,13 +75,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'onlinestore.urls'
 APPEND_SLASH = True
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': "django.template.backends.django.DjangoTemplates",
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -100,7 +105,7 @@ WSGI_APPLICATION = 'onlinestore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'postgres1',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
@@ -198,3 +203,8 @@ CACHES = {
         'LOCATION': 'django_cache',
     }
 }
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
